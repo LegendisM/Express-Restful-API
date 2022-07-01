@@ -1,0 +1,39 @@
+{
+  "name": "express-restful-api",
+  "description": "example project",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node app.js",
+    "test": "cross-env NODE_ENV=development npx nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LegendisM/Express-Restful-API.git"
+  },
+  "author": "LegendisM",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LegendisM/Express-Restful-API/issues"
+  },
+  "homepage": "https://github.com/LegendisM/Express-Restful-API#readme",
+  "dependencies": {
+    "@types/node": "^18.0.0",
+    "cookie-parser": "^1.4.6",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-session": "^1.17.3",
+    "fs": "^0.0.1-security",
+    "http": "^0.0.1-security",
+    "https": "^1.0.0",
+    "mariadb": "^3.0.0",
+    "md5": "^2.3.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.18",
+    "sequelize": "^6.21.2",
+    "uuid": "^8.3.2",
+    "winston": "^3.8.0",
+    "yup": "^0.32.11"
+  }
+}
