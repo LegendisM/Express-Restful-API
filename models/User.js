@@ -1,12 +1,12 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database/database');
 
-const User = sequelize.define("User",{
+const User = sequelize.define("User", {
     id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-      allowNull: false  
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false
     },
     username: {
         type: DataTypes.STRING,
@@ -16,20 +16,15 @@ const User = sequelize.define("User",{
     email: {
         type: DataTypes.STRING,
         unique: true,
-        allowNull:false,
+        allowNull: false,
     },
     password: {
         type: DataTypes.STRING,
-        allowNull:false,
+        allowNull: false,
     },
     group: {
-        type: DataTypes.ENUM("user","admin","superadmin"),
+        type: DataTypes.ENUM("user", "admin", "superadmin"),
         defaultValue: "user"
-    },
-    token: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
-        unique: true
     }
 });
 

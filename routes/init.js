@@ -6,8 +6,8 @@ const mainAuth = require('../middlewares/mainAuth');
 const usersRoute = require('./users');
 const postsRoute = require('./posts');
 
-router.use("/user",usersRoute);
-router.use("/post",postsRoute);
+router.use("/user", usersRoute);
+router.use("/post", postsRoute);
 
-module.exports = (app) => app.use("/api",mainAuth,router);
+module.exports = (app) => app.use("/api", mainAuth, router);
 
