@@ -13,19 +13,10 @@ app.use(cookieParser());
 app.use(expressSession({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: true }))
 app.use(express.urlencoded({ extended: false }));
 
-const initialation = async () => {
+//* Load Routes
+const routes = require('./routes/init')(app);
 
-    //* Sync Models
-    const SyncModels = await require('./database/syncModels').initialation();
-
-    //* Load Routes
-    const routes = await require('./routes/init')(app);
-
-    //* Start App
-    app.listen(process.env.PORT, () => {
-        console.log(`App Started In ${process.env.NODE_ENV} Mode On Port ${process.env.PORT}`);
-    });
-
-}
-
-initialation();
+//* Start App
+app.listen(process.env.PORT, () => {
+    console.log(`App Started In ${process.env.NODE_ENV} Mode On Port ${process.env.PORT}`);
+});
