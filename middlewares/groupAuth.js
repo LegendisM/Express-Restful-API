@@ -15,3 +15,10 @@ exports.Post = {
     Active: (...args) => hasPermission(...args, ["superadmin"]),
     DeActive: (...args) => hasPermission(...args, ["superadmin"]),
 }
+
+exports.PostComment = {
+    Read: (...args) => hasPermission(...args, ["all"]),
+    Create: (...args) => hasPermission(...args, ["all"]),
+    Edit: (...args) => hasPermission(...args, ["all"]),
+    Delete: (...args) => hasPermission(...args, ["all"]),
+}

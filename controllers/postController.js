@@ -8,6 +8,7 @@ exports.readAll = async (req, res) => {
 
 exports.readOne = async (req, res) => {
     if (!req.params.id) return res.status(400).json({ status: false, message: 'Invalid id' });
+    //* Find Post By ID
     let post = await PostModel.findOne({ _id: req.params.id }).populate("owner", "username");
     if (post)
         res.status(200).json(post);
@@ -17,10 +18,11 @@ exports.readOne = async (req, res) => {
 
 exports.create = async (req, res) => {
     try {
-        let owner = req.session.user._id;
         let { title, content } = req.body;
+        let owner = req.session.user._id;
         //* Validate
         let postValidator = await createPostValidator.validateSync({ title, content });
+        //* Create the Post
         let post = await PostModel.create({ title, content, owner });
         //* Send Response
         res.status(201).json({ state: true, message: "Post created successfully" });
@@ -31,9 +33,9 @@ exports.create = async (req, res) => {
 
 exports.edit = async (req, res) => {
     try {
+        let { title, content } = req.body;
         let postId = req.params.id;
         let owner = req.session.user._id;
-        let { title, content } = req.body;
         //* Validate
         let postValidator = await editPostValidator.validateSync({ title, content });
         //* Find Post With ID,Owner
@@ -53,8 +55,10 @@ exports.edit = async (req, res) => {
 exports.delete = async (req, res) => {
     let postID = req.params.id;
     let owner = req.session.user._id;
+    //* Find Post by ID,Owner
     let post = await PostModel.findOne({ _id: postID, owner });
     if (post) {
+        //* Delete Post And Send Response
         await post.delete();
         res.status(200).json({ state: true, message: "post deleted successfully" });
     } else {
