@@ -7,9 +7,12 @@ exports.readAll = async (req, res) => {
 }
 
 exports.readOne = async (req, res) => {
-    if (!req.params.id) return res.status(401).json({ status: false, message: 'Invalid id' });
+    if (!req.params.id) return res.status(400).json({ status: false, message: 'Invalid id' });
     let post = await PostModel.findOne({ _id: req.params.id }).populate("owner", "username");
-    res.status(200).json(post);
+    if (post)
+        res.status(200).json(post);
+    else
+        res.status(400).json({ state: false, message: "Invalid Post" });
 }
 
 exports.create = async (req, res) => {
@@ -20,7 +23,7 @@ exports.create = async (req, res) => {
         let postValidator = await createPostValidator.validateSync({ title, content });
         let post = await PostModel.create({ title, content, owner });
         //* Send Response
-        res.status(200).json({ state: true, message: "Post created successfully" });
+        res.status(201).json({ state: true, message: "Post created successfully" });
     } catch (err) {
         res.status(400).json({ state: false, message: err.errors });
     }
@@ -53,8 +56,8 @@ exports.delete = async (req, res) => {
     let post = await PostModel.findOne({ _id: postID, owner });
     if (post) {
         await post.delete();
-        res.status(401).json({ state: true, message: "post deleted successfully" });
+        res.status(200).json({ state: true, message: "post deleted successfully" });
     } else {
-        res.status(401).json({ state: false, message: "Invalid postID" });
+        res.status(400).json({ state: false, message: "Invalid postID" });
     }
 }
