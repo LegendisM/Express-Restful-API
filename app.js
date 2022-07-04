@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 
 //* Initialation App
 const app = express();
+const db = require('./database/database');
 
 //* Config App
 app.use(express.json());
