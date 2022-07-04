@@ -1,20 +1,60 @@
+const { createPostValidator, editPostValidator } = require('../validators/postValidator');
+const PostModel = require('../models/Post');
 
 exports.readAll = async (req, res) => {
-
+    let posts = await PostModel.find().populate("owner", "username");
+    res.status(200).json(posts);
 }
 
 exports.readOne = async (req, res) => {
-
+    if (!req.params.id) return res.status(401).json({ status: false, message: 'Invalid id' });
+    let post = await PostModel.findOne({ _id: req.params.id }).populate("owner", "username");
+    res.status(200).json(post);
 }
 
 exports.create = async (req, res) => {
-
+    try {
+        let owner = req.session.user._id;
+        let { title, content } = req.body;
+        //* Validate
+        let postValidator = await createPostValidator.validateSync({ title, content });
+        let post = await PostModel.create({ title, content, owner });
+        //* Send Response
+        res.status(200).json({ state: true, message: "Post created successfully" });
+    } catch (err) {
+        res.status(400).json({ state: false, message: err.errors });
+    }
 }
 
 exports.edit = async (req, res) => {
-
+    try {
+        let postId = req.params.id;
+        let owner = req.session.user._id;
+        let { title, content } = req.body;
+        //* Validate
+        let postValidator = await editPostValidator.validateSync({ title, content });
+        //* Find Post With ID,Owner
+        let post = await PostModel.findOne({ _id: postId, owner });
+        if (!post) return res.status(400).json({ state: false, message: "Bad Request" });;
+        //* Update Post
+        post.title = title;
+        post.content = content;
+        await post.save();
+        //* Send Response
+        res.status(200).json({ state: true, message: "OK" });
+    } catch (err) {
+        res.status(400).json({ state: false, message: err.errors || "Bad request" });
+    }
 }
 
 exports.delete = async (req, res) => {
-
+    let postID = req.params.id;
+    let owner = req.session.user._id;
+    let post = await PostModel.findOne({ _id: postID, owner });
+    if (post) {
+        await post.delete();
+        res.status(401).json({ state: true, message: "post deleted successfully" });
+    } else {
+        res.status(401).json({ state: false, message: "Invalid postID" });
+    }
 }

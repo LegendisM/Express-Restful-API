@@ -8,7 +8,7 @@ const postController = require('../controllers/postController');
 router.get("/", userAuth, PostAuth.Read, postController.readAll);
 router.get("/:id", userAuth, PostAuth.Read, postController.readOne);
 router.post("/create", userAuth, PostAuth.Create, postController.create);
-router.put("/edit", userAuth, PostAuth.Edit, postController.edit);
-router.delete("/edit", userAuth, PostAuth.Delete, postController.delete);
+router.put("/edit/:id", userAuth, PostAuth.Edit, postController.edit);
+router.delete("/delete/:id", userAuth, PostAuth.Delete, postController.delete);
 
 module.exports = router;
