@@ -1,6 +1,10 @@
 const { createPostCommentValidator } = require("../validators/postCommentValidator");
 const PostCommentMoel = require('../models/PostComment');
 
+exports.read = async (req, res) => {
+
+}
+
 exports.create = async (req, res) => {
     try {
         let { title, content, postid } = req.body;
@@ -15,3 +19,11 @@ exports.create = async (req, res) => {
         res.status(400).json({ state: false, message: err.errors });
     }
 };
+
+exports.edit = async (req, res) => {
+
+}
+
+exports.delete = async (req, res) => {
+
+}

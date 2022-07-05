@@ -28,4 +28,24 @@ router.put("/edit/:id", userAuth, PostAuth.Edit, postController.edit);
 // @route DELETE /post/delete/:id
 router.delete("/delete/:id", userAuth, PostAuth.Delete, postController.delete);
 
+// ** Post Comment ** 
+
+// @desc Get Comments Of Post By Post ID
+// @route GET /post/comment/:postid
+router.get("/comment/:id", userAuth, PostCommentAuth.Read, postCommentController.read);
+
+// @desc Create Comment
+// @route POST /post/comment
+// @body title , content , postid
+router.post("/comment", userAuth, PostCommentAuth.Create, postCommentController.create);
+
+// @desc Update Comment By ID
+// @route PUT /post/comment/:id
+// @body title , content
+router.put("/comment/:id", userAuth, PostCommentAuth.Edit, postCommentController.edit);
+
+// @desc Delete Comment By ID
+// @route DELETE /post/comment/:id
+router.delete("/comment/:id", userAuth, PostCommentAuth.Delete, postCommentController.delete);
+
 module.exports = router;
