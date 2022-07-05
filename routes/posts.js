@@ -6,18 +6,26 @@ const { Post: PostAuth, PostComment: PostCommentAuth } = require('../middlewares
 const postController = require('../controllers/postController');
 const postCommentController = require('../controllers/postCommentController');
 
-//* Post
+// @desc Find All Posts
+// @route GET /post
 router.get("/", userAuth, PostAuth.Read, postController.readAll);
-router.get("/:id", userAuth, PostAuth.Read, postController.readOne);
-router.post("/create", userAuth, PostAuth.Create, postController.create);
-router.put("/edit/:id", userAuth, PostAuth.Edit, postController.edit);
-router.delete("/delete/:id", userAuth, PostAuth.Delete, postController.delete);
 
-//* Comment Of Post (PROBLEM)
-// router.get("/comment", userAuth, PostCommentAuth.Read, postCommentController.create);
-// router.get("/comment/:id", userAuth, PostCommentAuth.Read, (req, res) => { });
-// router.post("/comment", userAuth, PostCommentAuth.Create, (req, res) => { });
-// router.put("/comment/:id", userAuth, PostCommentAuth.Edit, (req, res) => { });
-// router.delete("/comment/:id", userAuth, PostCommentAuth.Delete, (req, res) => { });
+// @desc Find One Post By ID
+// @route GET /post/:id
+router.get("/:id", userAuth, PostAuth.Read, postController.readOne);
+
+// @desc Create One Post
+// @route POST /post/create
+// @body title , content
+router.post("/create", userAuth, PostAuth.Create, postController.create);
+
+// @desc Edit One Post By ID
+// @route PUT /post/edit/:id
+// @body title , content
+router.put("/edit/:id", userAuth, PostAuth.Edit, postController.edit);
+
+// @desc Delete One Post By ID
+// @route DELETE /post/delete/:id
+router.delete("/delete/:id", userAuth, PostAuth.Delete, postController.delete);
 
 module.exports = router;
