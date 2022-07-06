@@ -32,7 +32,7 @@ router.delete("/delete/:id", userAuth, PostAuth.Delete, postController.delete);
 
 // @desc Get Comments Of Post By Post ID
 // @route GET /post/comment/:postid
-router.get("/comment/:id", userAuth, PostCommentAuth.Read, postCommentController.read);
+router.get("/comment/:postid", userAuth, PostCommentAuth.Read, postCommentController.read);
 
 // @desc Create Comment
 // @route POST /post/comment
