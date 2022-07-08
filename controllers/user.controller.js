@@ -2,7 +2,7 @@ const md5 = require('md5');
 const jwt = require('jsonwebtoken');
 const { registerValidator, loginValidator } = require('../validators/userValidator');
 
-const UserModel = require('../models/User');
+const UserModel = require('../models/user.model');
 
 exports.register = async (req, res) => {
     try {

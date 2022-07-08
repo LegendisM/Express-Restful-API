@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const userAuth = require('../middlewares/userAuth');
-const { Post: PostAuth, PostComment: PostCommentAuth } = require('../middlewares/groupAuth');
-const postController = require('../controllers/postController');
-const postCommentController = require('../controllers/postCommentController');
+const userAuth = require('../middlewares/user.auth.middleware');
+const { Post: PostAuth, PostComment: PostCommentAuth } = require('../middlewares/group.auth.middleware');
+const postController = require('../controllers/post.controller');
+const postCommentController = require('../controllers/post.comment.controller');
 
 // @desc Find All Posts
 // @route GET /post

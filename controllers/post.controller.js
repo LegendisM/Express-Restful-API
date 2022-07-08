@@ -1,5 +1,5 @@
 const { createPostValidator, editPostValidator, deletePostValidator } = require('../validators/postValidator');
-const PostModel = require('../models/Post');
+const PostModel = require('../models/post.model');
 
 exports.readAll = async (req, res) => {
     let posts = await PostModel.find().populate("owner", "username");
