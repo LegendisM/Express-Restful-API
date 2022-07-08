@@ -14,7 +14,7 @@ exports.readOne = async (req, res) => {
         if (post)
             res.status(200).json(post);
         else
-            res.status(400).json({ state: false, message: "Invalid Post" });
+            res.status(204).json({ state: false, message: "Invalid Post" });
     } catch (err) {
         res.status(400).json({ state: false, message: "Bad Request" });
     }
@@ -50,7 +50,7 @@ exports.edit = async (req, res) => {
         post.content = content;
         await post.save();
         //* Send Response
-        res.status(200).json({ state: true, message: "OK" });
+        res.status(304).json({ state: true, message: "OK" });
     } catch (err) {
         res.status(400).json({ state: false, message: err.errors || "Bad request" });
     }
@@ -69,7 +69,7 @@ exports.delete = async (req, res) => {
             await post.delete();
             res.status(200).json({ state: true, message: "post deleted successfully" });
         } else {
-            res.status(400).json({ state: false, message: "Invalid postID" });
+            res.status(204).json({ state: false, message: "Invalid postID" });
         }
     } catch (err) {
         res.status(400).json({ state: false, message: err.errors });

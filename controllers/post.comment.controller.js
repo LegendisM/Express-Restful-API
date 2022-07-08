@@ -37,9 +37,9 @@ exports.edit = async (req, res) => {
         let comment = await PostCommentMoel.findOneAndUpdate({ _id: id }, { title, content });
         //* Send Response Of Result
         if (comment)
-            res.status(200).json({ state: true, message: "The Comment Modifiy" });
+            res.status(304).json({ state: true, message: "The Comment Modifiy" });
         else
-            res.status(400).json({ state: false, message: "Invalid Comment To Modifiy" });
+            res.status(204).json({ state: false, message: "Invalid Comment To Modifiy" });
     } catch (err) {
         res.status(400).json({ state: false, message: err.errors });
     }
@@ -58,7 +58,7 @@ exports.delete = async (req, res) => {
             await comment.delete();
             res.status(200).json({ state: true, message: "comment deleted successfully" });
         } else {
-            res.status(400).json({ state: false, message: "Invalid comment" });
+            res.status(204).json({ state: false, message: "Invalid comment" });
         }
     } catch (err) {
         res.status(400).json({ state: false, message: err.errors });
