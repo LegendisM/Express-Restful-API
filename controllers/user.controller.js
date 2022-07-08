@@ -1,6 +1,6 @@
 const md5 = require('md5');
 const jwt = require('jsonwebtoken');
-const { registerValidator, loginValidator } = require('../validators/userValidator');
+const { registerValidator, loginValidator } = require('../validators/user.validator');
 
 const UserModel = require('../models/user.model');
 

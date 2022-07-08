@@ -1,4 +1,4 @@
-const { createPostValidator, editPostValidator, deletePostValidator } = require('../validators/postValidator');
+const { createPostValidator, editPostValidator, deletePostValidator } = require('../validators/post.validator');
 const PostModel = require('../models/post.model');
 
 exports.readAll = async (req, res) => {

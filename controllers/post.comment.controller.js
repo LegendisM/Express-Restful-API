@@ -1,4 +1,4 @@
-const { createPostCommentValidator, editPostCommentValidator, deletePostCommentValidator } = require("../validators/postCommentValidator");
+const { createPostCommentValidator, editPostCommentValidator, deletePostCommentValidator } = require("../validators/post.comment.validator");
 const PostCommentMoel = require('../models/post.comment.model');
 
 exports.read = async (req, res) => {
