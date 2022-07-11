@@ -1,0 +1,26 @@
+services:
+  mongo:
+    image: mongo:4.4.15
+    volumes:
+      - mongo:/data/db
+    ports:
+      - 27017:27017
+  redis:
+    image: redis:latest
+    command: 'redis-server --save 60 1 --loglevel warning'
+    volumes:
+      - redis:/data/redis
+    ports:
+      - 6379:6379
+  app:
+    container_name: restfulapp
+    build: .
+    ports:
+      - 3000:3000
+    depends_on:
+      - mongo
+      - redis
+
+volumes:
+  mongo: {}
+  redis: {}
