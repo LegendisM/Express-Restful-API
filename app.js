@@ -21,3 +21,5 @@ const routes = require('./routes/init')(app);
 app.listen(process.env.PORT, () => {
     console.log(`App Started In ${process.env.NODE_ENV} Mode On Port ${process.env.PORT}`);
 });
+
+module.exports = app;
